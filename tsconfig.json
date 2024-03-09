@@ -23,13 +23,16 @@
     ],
     "paths": {
       "@/*": ["./*"] // 定义了一个路径别名 `@`，将它映射到项目根目录下的所有文件
-    }
+    },
+    "strictNullChecks": true // 严格检查 null 和 undefined 值
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "postcss.config.js",
+    "tailwind.config.js"
   ],
   "exclude": [
     "node_modules"
