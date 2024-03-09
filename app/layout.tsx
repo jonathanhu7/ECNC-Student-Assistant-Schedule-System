@@ -1,5 +1,5 @@
 import React from "react";
-
+import '@/app/ui/globals.css'
 export const metadata = {
     title: 'ECNC 排班系统'
 }
