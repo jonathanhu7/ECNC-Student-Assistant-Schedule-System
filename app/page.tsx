@@ -12,7 +12,7 @@ export default function HomePage (): React.ReactElement {
         落霞与孤鹜齐飞，秋水共长天一色。
       </h1>
       <h1>
-        Hello, world!
+        Hello, world! ABCDEFGHIJKLMNOPQRSTUVWXYZ
       </h1>
     </div>
   )

@@ -1,7 +1,6 @@
 import localFont from 'next/font/local'
-import { Roboto_Slab } from 'next/font/google'
 
-export const lxgwWenKai = localFont({
+export const lxgwBright = localFont({
   src: [
     {
       path: './fonts/LXGWWenKaiLite-Light.ttf',
@@ -19,8 +18,4 @@ export const lxgwWenKai = localFont({
       style: 'normal'
     }
   ]
-})
-
-export const robotoSlab = Roboto_Slab({
-  subsets: ['latin']
 })
