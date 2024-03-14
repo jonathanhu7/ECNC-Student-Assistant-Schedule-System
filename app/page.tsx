@@ -1,24 +1,13 @@
-import LikeButton from './like-button'
 import React from 'react'
-function Header ({ title }: { title: string }): React.ReactElement {
-  return <h1>{title !== '' ? title : 'Default title'}</h1>
-}
-
 export default function HomePage (): React.ReactElement {
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton']
-
   return (
-        <div>
-            <Header title="Develop. Preview. Ship." />
-            <ul>
-                {names.map((name) => (
-                    <li key={name}>{name}</li>
-                ))}
-            </ul>
-            <LikeButton />
-            <h1 className="text-3xl font-bold underline">
-                Hello, world!
-            </h1>
-        </div>
+    <div>
+      <h1 className="text-3xl font-bold underline">
+        Hello, world!
+      </h1>
+      <h1 className="text-3xl font-bold underline">
+        你好，世界！
+      </h1>
+    </div>
   )
 }
