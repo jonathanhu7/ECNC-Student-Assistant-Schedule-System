@@ -5,3 +5,6 @@
 npm install
 npm run dev
 ```
+
+## 效果预览 (目前仍未完成)
+https://ecnc-student-assistant-schedule-system.vercel.app/
