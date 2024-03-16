@@ -1,7 +1,7 @@
 import React from "react";
 import "@/app/ui/globals.css";
 import { lxgwBright } from "@/app/ui/fonts"; /* 导入霞鹜文楷字体 */
-import MenuAppBar from "@/app/ui/components/menu-app-bar";
+import ControlPanel from "@/app/ui/components/control-panel";
 export const metadata = {
   title: "ECNC 排班系统",
 };
@@ -16,7 +16,7 @@ export default function RootLayout({
       <body className={`${lxgwBright.className}`}>
         <div>
           <div>
-            <MenuAppBar />
+            <ControlPanel />
           </div>
           <div>{children}</div>
         </div>
