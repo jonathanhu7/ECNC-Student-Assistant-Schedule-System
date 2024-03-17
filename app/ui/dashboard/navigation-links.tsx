@@ -35,7 +35,9 @@ export default function NavigationLinks(): React.ReactElement {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex items-center leading-none pt-3 pb-3 pl-10 rounded-xl w-11/12 m-auto",
+              `flex items-center leading-none 
+              pt-3 pb-3 pl-10 font-bold
+              rounded-xl w-11/12 m-auto`,
               {
                 /* 将目前所在的导航项变蓝 */
                 "bg-blue-500 text-white": pathname === link.href,
