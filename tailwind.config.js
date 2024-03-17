@@ -4,7 +4,15 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}", // 匹配 app 文件夹及其子文件夹下的 html,js,jsx,ts,tsx,mdx 文件
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "logo-color-main": "#37427c",
+        "logo-color-auxiliary": "#3d477f",
+      },
+      fontSize: {
+        "logo-size": "1.25rem",
+      },
+    },
   },
   plugins: [],
 };

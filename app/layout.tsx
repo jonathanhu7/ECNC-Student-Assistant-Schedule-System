@@ -1,7 +1,7 @@
 import React from "react";
 import "@/app/ui/globals.css";
-import { lxgwBright } from "@/app/ui/fonts"; /* 导入霞鹜文楷字体 */
-import ControlPanel from "@/app/ui/components/control-panel";
+import { notoSansSC } from "@/app/ui/fonts"; /* 导入中文字体 */
+import SideNavigationBar from "@/app/ui/side-navigation-bar"; /* 导入侧边导航栏 */
 export const metadata = {
   title: "ECNC 排班系统",
 };
@@ -13,10 +13,10 @@ export default function RootLayout({
 }): React.ReactElement {
   return (
     <html lang="zh-CN">
-      <body className={`${lxgwBright.className}`}>
+      <body className={`${notoSansSC.className}`}>
         <div>
           <div>
-            <ControlPanel />
+            <SideNavigationBar />
           </div>
           <div>{children}</div>
         </div>
