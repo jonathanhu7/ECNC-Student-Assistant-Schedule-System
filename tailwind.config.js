@@ -6,9 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "logo-color-main": "#37427c",
-        "logo-color-auxiliary": "#3d477f",
         "body-background-color": "#f0f2f5",
+        "logo-text-color": "#4f4f4f",
       },
     },
   },
