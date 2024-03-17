@@ -1,3 +1,8 @@
 @tailwind base; /* 引入 Tailwind 的基础样式 */
 @tailwind components; /* 引入 Tailwind 的组件层，用于定义更复杂、可复用的设计模式 */
 @tailwind utilities; /* 引入 Tailwind 的实用工具类，用于设置边距、填充、字体大小、颜色等 CSS 属性 */
+
+html,
+body {
+  @apply h-full; /* 设置 html 和 body 的高度为 100%，设置后才能使子元素的某些高度设置生效 */
+}

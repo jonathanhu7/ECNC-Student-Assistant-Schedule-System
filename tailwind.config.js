@@ -8,9 +8,7 @@ module.exports = {
       colors: {
         "logo-color-main": "#37427c",
         "logo-color-auxiliary": "#3d477f",
-      },
-      fontSize: {
-        "logo-size": "1.25rem",
+        "body-background-color": "#f0f2f5",
       },
     },
   },
