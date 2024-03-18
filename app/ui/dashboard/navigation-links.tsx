@@ -4,25 +4,7 @@ import { usePathname } from "next/navigation"; /* usePathname 是用来获取路
 import Link from "next/link"; /* Link 用于设置导航栏的跳转项 */
 import Image from "next/image";
 import clsx from "clsx"; /* clsx 可以根据条件来选择元素被渲染的形式 */
-
-// 导航栏涉及到的路径
-const links = [
-  {
-    name: "主页",
-    href: "/dashboard",
-    icon: "/home.png",
-  },
-  {
-    name: "空闲时间提交",
-    href: "/dashboard/free-time-submit",
-    icon: "/form.png",
-  },
-  {
-    name: "排班及班表调整",
-    href: "/dashboard/schedule",
-    icon: "/assessment.png",
-  },
-];
+import { links } from "@/app/config/linksConfig";
 
 export default function NavigationLinks(): React.ReactElement {
   const pathname = usePathname();

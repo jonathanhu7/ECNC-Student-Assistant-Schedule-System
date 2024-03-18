@@ -5,7 +5,7 @@ import NavigationLinks from "@/app/ui/dashboard/navigation-links";
 export default function SideNavigationBar(): React.ReactElement {
   return (
     <div
-      className="max-w-64 /* 设置导航栏宽度 */
+      className="w-64 /* 设置导航栏宽度 */
       bg-white {/* 设置导航栏背景颜色 */}
       rounded-xl {/* 设置导航栏的圆角 */}
       h-full"

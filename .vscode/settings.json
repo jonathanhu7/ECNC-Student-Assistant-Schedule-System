@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/deployphp/deployer/master/src/schema.json": [
+            "file:///c%3A/Users/huzzh/Desktop/Works/Development/ECNC-Student-Assistant-Schedule-System/.github/workflows/deploy.yml",
+            "file:///c%3A/Users/huzzh/Desktop/Works/Development/ECNC-Student-Assistant-Schedule-System/.github/workflows/deploy.yaml"
+        ]
+    }
+}
