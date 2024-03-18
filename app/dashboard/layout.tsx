@@ -15,16 +15,12 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={`${lxgwBright.className} bg-body-background-color`}>
-        <div
-          className="h-full {/* 设置高度为 100% 才能让内部高度生效 */}
-          p-3 {/* 设置显示内容和窗口边缘之间的距离 */}
-          flex {/* 这样才能让子元素并排显示 */}"
-        >
+        <div className="h-full p-3 flex">
           <SideNavigationBar /> {/* 侧边导航栏 */}
-          <div>
+          <div className="flex-1 ml-5 h-full flex flex-col">
             <Breadcrumb />
             {/* 导航栏中每一项对应的内容 */}
-            <div>{children}</div>
+            <div className="grow h-full">{children}</div>
           </div>
         </div>
       </body>

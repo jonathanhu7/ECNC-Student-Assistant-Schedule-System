@@ -10,7 +10,5 @@ export default function Breadcrumb(): React.ReactNode {
   const currentLink = links.find((link) => pathname === link.href);
   const breadcrumbName = currentLink != null ? currentLink.name : "未知页面";
 
-  return (
-    <div className="text-xl text-gray-600 ml-5 mt-3">{breadcrumbName}</div>
-  );
+  return <div className="text-xl text-gray-600 mb-3">{breadcrumbName}</div>;
 }
