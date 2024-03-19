@@ -12,6 +12,9 @@ module.exports = {
       spacing: {
         "11/12": "91.666667%",
       },
+      scale: {
+        175: "1.75",
+      },
     },
   },
   plugins: [],

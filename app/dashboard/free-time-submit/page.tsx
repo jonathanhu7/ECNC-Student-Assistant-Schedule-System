@@ -1,30 +1,16 @@
 import React from "react";
-import { scheduleTemplate } from "@/app/config/scheduleTemplateConfig";
+import FreeTimeSubmitForm from "@/app/ui/dashboard/free-time-submit/free-time-submit-form";
+import Image from "next/image";
 export default function HomePage(): React.ReactElement {
   return (
-    <div className="bg-white h-full rounded-xl flex justify-center flex-col items-center">
-      <table className="w-11/12 h-11/12 border-4">
-        <thead>
-          <tr>
-            <td> </td>
-            {scheduleTemplate.dayOfTheWeek.map((day, index) => (
-              <td key={index}>{day}</td>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {scheduleTemplate.workingHours.map((hour, hourIndex) => (
-            <tr key={hourIndex}>
-              <td>{hour}</td>
-              {Array.from({
-                length: scheduleTemplate.dayOfTheWeek.length - 1,
-              }).map((_, index) => (
-                <td key={index}> </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="bg-white h-full rounded-xl flex justify-center flex items-center space-x-28">
+      <FreeTimeSubmitForm />
+      <Image
+        src="/work-figure.jpg"
+        alt="work figure"
+        width={400}
+        height={400}
+      />
     </div>
   );
 }
