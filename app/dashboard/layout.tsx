@@ -3,9 +3,6 @@ import "@/app/ui/globals.css"; /* 引入全局样式 */
 import SideNavigationBar from "@/app/ui/dashboard/side-navigation-bar";
 import { lxgwBright } from "@/app/ui/fonts"; /* 导入侧边导航栏 */
 import Breadcrumb from "@/app/ui/dashboard/breadcrumb";
-export const metadata = {
-  title: "ECNC 排班系统" /* 显示在标签页上的文字 */,
-};
 
 export default function RootLayout({
   children,
