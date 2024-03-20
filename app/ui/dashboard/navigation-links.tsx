@@ -27,10 +27,7 @@ export default function NavigationLinks(): React.ReactElement {
             )}
           >
             <Image src={link.icon} alt={link.name} width={18} height={18} />
-            <p
-              className="text-lg
-              ml-3"
-            >
+            <p className="text-lg ml-3">
               {link.name}
             </p>
           </Link>
