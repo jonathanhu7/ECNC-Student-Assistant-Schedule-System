@@ -3,11 +3,12 @@ import Image from "next/image";
 
 export default function Page(): React.ReactNode {
   return (
-    <div className="w-96">
+    <div className="h-5/6 w-10/12 flex rounded-3xl bg-white">
       <Image
+        className="rounded-l-3xl"
         src="/login-figure.jpg"
         alt="login figure"
-        width={200}
+        width={700}
         height={200}
       />
       <div>
