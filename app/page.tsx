@@ -1,28 +1,14 @@
-import React from "react";
-import Image from "next/image";
+/* 该 page.tsx 不渲染任何界面，只负责根据用户的登陆状态来重定向 */
+import { redirect } from "next/navigation";
 
-export default function Page(): React.ReactNode {
-  return (
-    <div className="h-5/6 w-10/12 flex rounded-3xl bg-white">
-      <Image
-        className="rounded-l-3xl"
-        src="/login-figure.jpg"
-        alt="login figure"
-        width={700}
-        height={200}
-      />
-      <div>
-        <p>ECNC 排班系统</p>
-        <input type="text" />
-        <input type="text" />
-        <input type="checkbox"></input>
-        <button>忘记密码</button>
-        <button>登陆</button>
-        <button>微信登陆</button>
-        <button>飞书登陆</button>
-        <p>没有账号？</p>
-        <button>注册</button>
-      </div>
-    </div>
-  );
+export default function Page(): void {
+  // TODO：将下面的 userIsLoggedIn = false 替换为 cookie 登陆检查逻辑
+  const userIsLoggedIn = false;
+
+  // 判断用户是否登陆，若未登陆则跳转到 /authentication/login 页面，否则跳转到 /main/dashboard 页面
+  if (!userIsLoggedIn) {
+    redirect("/authentication/login");
+  } else {
+    redirect("/main/dashboard");
+  }
 }

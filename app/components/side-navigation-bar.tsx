@@ -1,6 +1,6 @@
 import React from "react"; /* 声明 React 以防止 ESLint 报错 */
-import ECNCLogo from "@/app/ui/dashboard/ecnc-logo"; /* 引入 Logo 组件 */
-import NavigationLinks from "@/app/ui/dashboard/navigation-links";
+import ECNCLogo from "@/app/components/ecnc-logo"; /* 引入 Logo 组件 */
+import NavigationLinks from "@/app/components/navigation-links";
 
 export default function SideNavigationBar(): React.ReactElement {
   return (
