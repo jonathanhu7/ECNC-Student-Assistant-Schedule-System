@@ -22,4 +22,5 @@ module.exports = {
   plugins: ["react"],
   rules: {},
   settings: { react: { version: "detect" } },
+  ignorePatterns: ["next-env.d.ts"],
 };
