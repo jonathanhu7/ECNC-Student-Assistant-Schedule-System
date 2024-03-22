@@ -28,6 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "postcss.config.js",
+    ".eslintrc.js"
   ],
   "exclude": ["node_modules"]
 }
