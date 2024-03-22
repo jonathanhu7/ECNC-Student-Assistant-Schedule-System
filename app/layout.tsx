@@ -1,5 +1,4 @@
 import React from "react";
-import "@/app/ui/globals.css"; /* 一定要引入这句话！不然 tailwind css 不生效 */
 import { lxgwBright } from "@/app/ui/fonts";
 
 export const metadata = {

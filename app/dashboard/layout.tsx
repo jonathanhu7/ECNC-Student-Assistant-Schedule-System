@@ -1,5 +1,4 @@
 import React from "react"; /* 声明 React 以防止 ESLint 报错 */
-import "@/app/ui/globals.css"; /* 引入全局样式 */
 import SideNavigationBar from "@/app/ui/dashboard/side-navigation-bar";
 import { lxgwBright } from "@/app/ui/fonts";
 import Breadcrumb from "@/app/ui/dashboard/breadcrumb";
