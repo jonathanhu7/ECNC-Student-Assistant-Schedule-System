@@ -1,0 +1,14 @@
+/* css 变量 */
+:root {
+  --icon-fontSize-sm: 1rem;
+  --icon-fontSize-md: 1.25rem;
+  --icon-fontSize-lg: 1.5rem;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
