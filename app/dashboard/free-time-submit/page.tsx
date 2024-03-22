@@ -1,5 +1,5 @@
 import React from "react";
-import FreeTimeSubmitForm from "@/app/ui/dashboard/free-time-submit/free-time-submit-form";
+import FreeTimeSubmitForm from "@/app/components/free-time-submit-form";
 import Image from "next/image";
 export default function HomePage(): React.ReactElement {
   return (

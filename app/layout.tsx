@@ -1,5 +1,5 @@
 import React from "react";
-import { lxgwBright } from "@/app/ui/fonts";
+import { lxgwBright } from "@/app/config/fonts";
 
 export const metadata = {
   title: "ECNC 排班系统" /* 显示在标签页上的文字 */,

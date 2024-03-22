@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import { Roboto } from "next/font/google";
 
 export const lxgwBright = localFont({
   // 导出霞鹜文楷字体
@@ -20,9 +19,4 @@ export const lxgwBright = localFont({
       style: "normal",
     },
   ],
-});
-
-export const roboto = Roboto({
-  weight: ["100", "400", "700"],
-  subsets: ["latin"],
 });

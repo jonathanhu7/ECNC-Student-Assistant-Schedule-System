@@ -1,7 +1,7 @@
 import React from "react"; /* 声明 React 以防止 ESLint 报错 */
-import SideNavigationBar from "@/app/ui/dashboard/side-navigation-bar";
-import { lxgwBright } from "@/app/ui/fonts";
-import Breadcrumb from "@/app/ui/dashboard/breadcrumb";
+import SideNavigationBar from "@/app/components/side-navigation-bar";
+import { lxgwBright } from "@/app/config/fonts";
+import Breadcrumb from "@/app/components/breadcrumb";
 
 export default function RootLayout({
   children,
