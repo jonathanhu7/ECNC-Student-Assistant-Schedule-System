@@ -1,0 +1,27 @@
+"filename", "language", "JSON with Comments", "JavaScript", "TypeScript", "TypeScript JSX", "Markdown", "JSON", "CSS", "comment", "blank", "total"
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/.eslintrc.js", "JavaScript", 0, 26, 0, 0, 0, 0, 0, 0, 1, 27
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/.prettierrc", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 1, 2
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/README.md", "Markdown", 0, 0, 0, 0, 6, 0, 0, 0, 3, 9
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/next-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 4, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/package-lock.json", "JSON", 0, 0, 0, 0, 0, 4998, 0, 0, 1, 4999
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/package.json", "JSON", 0, 0, 0, 0, 0, 34, 0, 0, 1, 35
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/postcss.config.js", "JavaScript", 0, 5, 0, 0, 0, 0, 0, 0, 1, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/auth/reset-password/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/auth/sign-in/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/auth/sign-up/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/dashboard/free-time-submit/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/dashboard/layout.tsx", "TypeScript JSX", 0, 0, 0, 11, 0, 0, 0, 1, 2, 14
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/dashboard/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/dashboard/schedule/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/layout.tsx", "TypeScript JSX", 0, 0, 0, 13, 0, 0, 0, 0, 2, 15
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/app/page.tsx", "TypeScript JSX", 0, 0, 0, 4, 0, 0, 0, 1, 2, 7
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/components/auth/auth-guard.tsx", "TypeScript JSX", 0, 0, 0, 9, 0, 0, 0, 3, 6, 18
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/config.ts", "TypeScript", 0, 0, 14, 0, 0, 0, 0, 1, 3, 18
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/contexts/user-context.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 13, 8, 47
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/hooks/use-user.ts", "TypeScript", 0, 0, 9, 0, 0, 0, 0, 3, 5, 17
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/lib/auth/client.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/path.ts", "TypeScript", 0, 0, 22, 0, 0, 0, 0, 2, 3, 27
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/style/global.css", "CSS", 0, 0, 0, 0, 0, 0, 6, 0, 2, 8
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/src/types/user.ts", "TypeScript", 0, 0, 7, 0, 0, 0, 0, 2, 2, 11
+"/home/jonathanhu/Works/Development/ECNC-Student-Assistant-Schedule-System/tsconfig.json", "JSON with Comments", 34, 0, 0, 0, 0, 0, 0, 0, 1, 35
+"Total", "-", 34, 31, 52, 87, 6, 5033, 6, 30, 59, 5338

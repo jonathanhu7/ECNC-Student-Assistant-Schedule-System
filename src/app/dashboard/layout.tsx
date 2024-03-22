@@ -1,7 +1,5 @@
-import React from "react"; /* 声明 React 以防止 ESLint 报错 */
-// import SideNavigationBar from "@/app/components/side-navigation-bar";
-import { lxgwBright } from "@/src/config/fonts";
-// import Breadcrumb from "@/app/components/breadcrumb";
+import React from "react";
+import { AuthGuard } from "@/components/auth/auth-guard";
 
 export default function RootLayout({
   children,
@@ -9,17 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): React.ReactElement {
   return (
-    <html lang="zh-CN">
-      <body className={`${lxgwBright.className} bg-body-background-color`}>
-        <div className="h-full p-3 flex">
-          {/* <SideNavigationBar /> 侧边导航栏 */}
-          <div className="flex-1 ml-5 h-full flex flex-col">
-            {/* <Breadcrumb /> */}
-            {/* 导航栏中每一项对应的内容 */}
-            <div className="grow h-full">{children}</div>
-          </div>
-        </div>
-      </body>
-    </html>
+    // AuthGuard 组件是一个权限保护组件，确保只有满足特定条件的用户可以访问其包含的子组件
+    <AuthGuard>{children}</AuthGuard>
   );
 }
