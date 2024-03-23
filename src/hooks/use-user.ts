@@ -9,7 +9,7 @@ export function useUser(): UserContextValue {
 
   if (userContext === undefined) {
     // 当 useUser 钩子被调用的时候，如果它没有在被 UserProvider 包裹下使用的话，它就没法获取到 UserContext，此时它就为 undefined
-    throw new Error("useUser 必须在 userContext 包裹下使用");
+    throw new Error("useUser 必须在 UserProvider 包裹下使用");
   }
 
   return userContext;

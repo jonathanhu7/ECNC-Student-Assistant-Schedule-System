@@ -12,7 +12,7 @@ const user = {
 
 class AuthClient {
   // getUser 从服务器上获取信息，所以应该是异步的
-  async getUser(): Promise<{ data?: User | null; error?: string | null }> {
+  async getUser(): Promise<{ data: User | null; error?: string | null }> {
     // TODO: 添加一个 API 请求
     return { data: user };
   }

@@ -1,7 +1,10 @@
+"use client";
+
 // Context 允许你在组件树中跨层级直接传递数据，避免你在每个层级中手动转递 props
 // 简单来说就是，Context 为全局数据（如当前认证的用户、主题或首选语言）提供一个共享的数据源
 
 import { authClient } from "@/lib/auth/client";
+import { logger } from "@/lib/default-logger";
 import type { User } from "@/types/user";
 import React from "react";
 
@@ -15,6 +18,8 @@ export interface UserContextValue {
   error: string | null;
   // 从服务器获取 user 信息是异步的，因此你还需要有一个 isLoading 的状态，表示是否正在获取
   isLoading: boolean;
+  // checkSession 是一个暴露给子组件的函数，用来检查用户状态
+  checkSession?: () => Promise<void>;
 }
 
 // UserContext 即为用户上下文，初始化为 undefined
@@ -22,12 +27,14 @@ export const UserContext = React.createContext<UserContextValue | undefined>(
   undefined,
 );
 
-export interface UserProvider {
+export interface UserProviderProps {
   children: React.ReactNode;
 }
 
 // UserProvider 组件，提供 User 上下文信息给所有的子组件
-export function UserProvider({ children }: UserProvider): React.ReactElement {
+export function UserProvider({
+  children,
+}: UserProviderProps): React.ReactElement {
   // 通过 useState 来实时设置 user 状态，并将其作为上下文转发出去
   const [userState, setUserState] = React.useState<{
     user: User | null;
@@ -45,11 +52,45 @@ export function UserProvider({ children }: UserProvider): React.ReactElement {
     try {
       const { data, error } = await authClient.getUser();
 
-      if (error) {
-        logger
+      if (error !== null) {
+        logger.error(error);
+        setUserState((prev) => ({
+          ...prev,
+          user: null,
+          error: "服务端获取用户失败",
+          isLoading: false,
+        }));
       }
-    }
-  });
 
-  return <div></div>;
+      // 从服务端获取用户成功
+      setUserState((prev) => ({
+        ...prev,
+        user: data,
+        error: null,
+        isLoading: false,
+      }));
+    } catch (err) {
+      // 此时客户端获取用户失败
+      logger.error(err);
+      setUserState((prev) => ({
+        ...prev,
+        user: null,
+        error: "客户端获取用户失败",
+        isLoading: false,
+      }));
+    }
+  }, []);
+
+  // useEffect 可以让你在函数组件中执行副作用操作
+  React.useEffect(() => {
+    checkSession().catch((err) => {
+      logger.error(err);
+    });
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ ...userState, checkSession }}>
+      {children}
+    </UserContext.Provider>
+  );
 }

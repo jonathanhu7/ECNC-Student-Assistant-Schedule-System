@@ -1,5 +1,6 @@
 import React from "react";
 import "@/src/style/global.css";
+import { UserProvider } from "@/contexts/user-context";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
 }): React.ReactElement {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>
+        <UserProvider>{children}</UserProvider>
+      </body>
     </html>
   );
 }
