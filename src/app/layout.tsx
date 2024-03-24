@@ -1,5 +1,5 @@
 import React from "react";
-import "@/src/style/global.css";
+import "@/style/global.css";
 import { UserProvider } from "@/contexts/user-context";
 
 export default function RootLayout({
