@@ -36,6 +36,8 @@ export function UserProvider({
   children,
 }: UserProviderProps): React.ReactElement {
   // 通过 useState 来实时设置 user 状态，并将其作为上下文转发出去
+  // useState 是一个钩子 (Hook)，用于在函数组件中添加局部状态
+  // 当我们的组件需要保存一些会随着时间改变的数据时（比如下面的 userState），就可能会需要用到 useState。
   const [userState, setUserState] = React.useState<{
     user: User | null;
     error: string | null;
@@ -46,14 +48,19 @@ export function UserProvider({
     isLoading: false,
   });
 
-  // 当你需要将某个函数传出去的时候，使用 useCallback 可以放置页面重渲染的时候，函数重新被创造一次，这样可以提高速度
-  // checkSession 需要从服务器获取信息，因此该函数需要是异步的
+  // useCallback 是一个钩子 (Hook)，用于对函数进行缓存，在函数组件中，每次组件重新渲染时，其中定义的函数都会被重新创建。
+  // 当你将一个函数作为 prop 传给子组件时（比如下面的 checkSession 会传递给 UserContext.Provider），每次父组件（UserProvider）重新
+  // 渲染时，checkSession 都会被重新创建，如果不缓存的话，UserContext.Provider 以为接收到了新的 prop，从而导致不必要的重渲染
   const checkSession = React.useCallback(async (): Promise<void> => {
+    // checkSession 主要通过 authClient 来获取用户信息，根据获取结果来调整 userState
     try {
       const { data, error } = await authClient.getUser();
 
       if (error !== null) {
         logger.error(error);
+        // prev 表示 setUserState 被调用前的状态，使用 (prev) => newState 来更新状态时
+        // React 会将当前的状态值作为参数传递给这个函数，这样就可以确保状态更新是基于最新的状态值
+        // 避免了因为异步状态更新导致的潜在的竞态条件问题
         setUserState((prev) => ({
           ...prev,
           user: null,
@@ -81,7 +88,10 @@ export function UserProvider({
     }
   }, []);
 
-  // useEffect 可以让你在函数组件中执行副作用操作
+  // useEffect 是一个钩子 (Hook)，它能够让你在函数组件中执行副作用操作。副作用指那些对组建的渲染
+  // 结果有影响但却发生在渲染流程之外的操作，比如数据获取、订阅、手动修改 DOM 等等。
+  // 比如这里的 checkSession 本质上就是一个从服务区获取用户数据的过程，获取数据不应该在渲染流程中进行，
+  // 因此你应该使用 useEffect 来进行数据获取
   React.useEffect(() => {
     checkSession().catch((err) => {
       logger.error(err);
@@ -89,6 +99,9 @@ export function UserProvider({
   }, []);
 
   return (
+    // 当你调用 React.createContext 时，React 会自动为你创建一个 Provider
+    // Provider 组件允许你将上下文的值传递给组件树中所有位于此 Provider 内部的组件
+    // Provider 的 value 应该填写你想要共享的数据与函数
     <UserContext.Provider value={{ ...userState, checkSession }}>
       {children}
     </UserContext.Provider>
