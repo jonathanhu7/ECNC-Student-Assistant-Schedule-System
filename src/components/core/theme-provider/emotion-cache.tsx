@@ -1,7 +1,7 @@
 // emotion-cache.tsx 的作用是优化使用 Next.js 框架和 Emotion 库时，服务端渲染 (Server Side Render, SSR) 的样式处理
 // Emotion 是一个高性能的 CSS-in-JS 库，它允许你在 JavaScript 文件中以字符串或对象的形式写入样式
 
-"use clients";
+"use client";
 
 import type {
   EmotionCache,

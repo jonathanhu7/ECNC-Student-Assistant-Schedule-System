@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   CssBaseline, // CssBaseline 的作用是确保应用的基础样式的一致性，通过充值浏览器默认样式来实现
@@ -14,6 +16,7 @@ export function ThemeProvider({
   children,
 }: ThemeProviderProps): React.ReactElement {
   const theme = createTheme();
+
   return (
     <EmotionCache options={{ key: "mui" }}>
       <CssVarsProvider theme={theme}>
