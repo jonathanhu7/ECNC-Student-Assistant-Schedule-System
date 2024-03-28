@@ -3,6 +3,9 @@
 import { experimental_extendTheme as extendTheme } from "@mui/material/styles";
 import { type Theme } from "./types";
 import { components } from "./components/components";
+import { colorSchemes } from "./color-schemes";
+import { shadows } from "./shadows";
+import { typography } from "./typography";
 
 // declare module 是 TypeScript的一个特性，允许你向现有的库类型添加新的属性或字段。
 declare module "@mui/material/styles/createPalette" {
@@ -51,6 +54,14 @@ export function createTheme(): Theme {
     },
     // components 是一系列自定义的 MUI 组件
     components,
+    // colorSchemes 用来设置明亮模式和暗黑模式
+    colorSchemes,
+    // shadows 为阴影的相关设置
+    shadows,
+    // 设置圆角
+    shape: { borderRadius: 8 },
+    // 设置排版
+    typography,
   });
 
   return theme;
