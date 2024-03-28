@@ -32,7 +32,7 @@ export function AuthGuard({
     }
 
     if (user === null) {
-      logger.debug("[AuthGuard]: 用户为登陆，即将跳转到登陆页面");
+      logger.debug("[AuthGuard]: 用户未登陆，即将跳转到登陆页面");
       router.replace(paths.auth.signIn);
       return;
     }
@@ -52,7 +52,7 @@ export function AuthGuard({
   }
 
   if (error !== null) {
-    return <Alert color="error">错误！</Alert>;
+    return <Alert color="error">{error}</Alert>;
   }
 
   return <React.Fragment>{children}</React.Fragment>;
