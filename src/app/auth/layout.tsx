@@ -62,9 +62,29 @@ export default function Layout({ children }: LayoutProps): React.ReactElement {
               />
             </Box>
           </Box>
-          {children}
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              flex: "1 1 auto",
+              justifyContent: "center",
+              p: 3,
+            }}
+          >
+            <Box sx={{ maxWidth: "450px", width: "100%" }}>{children}</Box>
+          </Box>
+        </Box>
+        {/* 接下来对登录布局的右半部分进行设置 */}
+        <Box
+          sx={{
+            alignItems: "center",
+            backgroundImage: "url(/auth-background.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        >
         </Box>
       </Box>
-    </GuestGuard>
+    </GuestGuard >
   );
 }
