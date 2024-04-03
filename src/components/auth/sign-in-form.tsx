@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { z as zod } from "zod"; // zod 可以帮助我们检查表单数据
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { authClient } from "@/lib/auth/client";
 
 // 定义表单的数据类型
 const schema = zod.object({
@@ -37,5 +38,31 @@ export function SignInForm(): React.ReactElement {
     formState: { errors },
   } = useForm<Values>({ defaultValues, resolver: zodResolver(schema) });
 
-  return <Stack></Stack>;
+  const onSubmit = React.useCallback(
+    async (values: Values): Promise<void> => {
+      setIsPending(true);
+      const { error } = await authClient.signInWithPassword(values);
+
+      if (error !== undefined) {
+        setError("root", { type: "server", message: error });
+        setIsPending(false);
+        return;
+      }
+
+      // 更新用户上下文
+      await checkSession?.();
+
+      // 登陆成功后刷新页面
+      router.refresh();
+    },
+    [checkSession, router, setError],
+  );
+
+  return (
+    <Stack spacing={4}>
+      <Stack spacing={1}>
+        <Typography variant="h4">登录</Typography>
+      </Stack>
+    </Stack>
+  );
 }
