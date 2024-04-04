@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import RouterLink from "next/link";
 import { paths } from "@/path";
-import { DynamicLogo } from "@/components/core/logo";
+import { Logo } from "@/components/core/logo";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,11 +14,8 @@ export default function Layout({ children }: LayoutProps): React.ReactElement {
     <GuestGuard>
       <Box
         sx={{
-          // 在小屏幕上，容器将使用 flex 布局，在大屏幕上，将切换到 grid 布局
-          display: { xs: "flex", lg: "grid" },
-          // 在小屏幕上，子元素的排列方向为垂直方向
-          flexDirection: "column",
-          // 在大屏幕上，创建两列，每列占用可用可空间的相等份额
+          display: "grid",
+          // 创建两列，每列占用可用可空间的相等份额
           gridTemplateColumns: "1fr 1fr",
           // 设置容器的最小高度为 100%，容器至少会沾满其父容器的全部高度
           minHeight: "100%",
@@ -54,12 +51,7 @@ export default function Layout({ children }: LayoutProps): React.ReactElement {
                 fontSize: 0,
               }}
             >
-              <DynamicLogo
-                colorDark="light"
-                colorLight="dark"
-                height={32}
-                width={122}
-              />
+              <Logo height={32} width={122} />
             </Box>
           </Box>
           <Box
@@ -80,11 +72,10 @@ export default function Layout({ children }: LayoutProps): React.ReactElement {
             alignItems: "center",
             backgroundImage: "url(/auth-background.jpg)",
             backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
-        >
-        </Box>
+        ></Box>
       </Box>
-    </GuestGuard >
+    </GuestGuard>
   );
 }

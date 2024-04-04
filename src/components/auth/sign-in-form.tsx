@@ -60,9 +60,7 @@ export function SignInForm(): React.ReactElement {
 
   return (
     <Stack spacing={4}>
-      <Stack spacing={1}>
-        <Typography variant="h4">登录</Typography>
-      </Stack>
+      <Typography variant="h4">登录</Typography>
     </Stack>
   );
 }
