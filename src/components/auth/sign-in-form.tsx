@@ -1,13 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { Stack, Typography } from "@mui/material";
+import {
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { z as zod } from "zod"; // zod 可以帮助我们检查表单数据
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth/client";
+import { FormControl } from "@mui/base";
 
 // 定义表单的数据类型
 const schema = zod.object({
@@ -61,6 +68,23 @@ export function SignInForm(): React.ReactElement {
   return (
     <Stack spacing={4}>
       <Typography variant="h4">登录</Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={2}>
+          <Controller
+            control={control}
+            name="netid"
+            render={({ field }) => (
+              <FormControl error={Boolean(errors.netid)}>
+                <InputLabel>NetID</InputLabel>
+                <OutlinedInput {...field} label="NetID" />
+                {errors.netid !== undefined ? (
+                  <FormHelperText>{errors.netid.message}</FormHelperText>
+                ) : null}
+              </FormControl>
+            )}
+          />
+        </Stack>
+      </form>
     </Stack>
   );
 }
