@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import {
+  Alert,
+  Button,
   FormHelperText,
   InputLabel,
   OutlinedInput,
@@ -14,7 +16,11 @@ import { useUser } from "@/hooks/use-user";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth/client";
-import { FormControl } from "@mui/base";
+import FormControl from "@mui/material/FormControl";
+import {
+  Eye as EyeIcon,
+  EyeSlash as EyeSlashIcon,
+} from "@phosphor-icons/react";
 
 // 定义表单的数据类型
 const schema = zod.object({
@@ -31,7 +37,6 @@ const defaultValues = {
   password: "1qaz2wsx.",
 } satisfies Values;
 
-// TODO: 完成登录表单
 export function SignInForm(): React.ReactElement {
   const router = useRouter();
   const { checkSession } = useUser(); // 从 userContext 中解构出 checkSession 方法
@@ -45,7 +50,7 @@ export function SignInForm(): React.ReactElement {
     formState: { errors },
   } = useForm<Values>({ defaultValues, resolver: zodResolver(schema) });
 
-  const onSubmit = React.useCallback(
+  const submitInfo = React.useCallback(
     async (values: Values): Promise<void> => {
       setIsPending(true);
       const { error } = await authClient.signInWithPassword(values);
@@ -68,7 +73,7 @@ export function SignInForm(): React.ReactElement {
   return (
     <Stack spacing={4}>
       <Typography variant="h4">登录</Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(submitInfo)}>
         <Stack spacing={2}>
           <Controller
             control={control}
@@ -76,13 +81,55 @@ export function SignInForm(): React.ReactElement {
             render={({ field }) => (
               <FormControl error={Boolean(errors.netid)}>
                 <InputLabel>NetID</InputLabel>
-                <OutlinedInput {...field} label="NetID" />
+                <OutlinedInput {...field} label="NetID" type="text" />
                 {errors.netid !== undefined ? (
                   <FormHelperText>{errors.netid.message}</FormHelperText>
                 ) : null}
               </FormControl>
             )}
           />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <FormControl error={Boolean(errors.password)}>
+                <InputLabel>密码</InputLabel>
+                <OutlinedInput
+                  {...field}
+                  endAdornment={
+                    showPassword ? (
+                      <EyeIcon
+                        cursor="pointer"
+                        fontSize="var(--icon-fontSize)"
+                        onClick={() => {
+                          setShowPassword(false);
+                        }}
+                      />
+                    ) : (
+                      <EyeSlashIcon
+                        cursor="pointer"
+                        fontSize="var(--icon-fontSize)"
+                        onClick={() => {
+                          setShowPassword(true);
+                        }}
+                      />
+                    )
+                  }
+                  label="密码"
+                  type={showPassword ? "text" : "password"}
+                />
+                {errors.password !== undefined ? (
+                  <FormHelperText>{errors.password.message}</FormHelperText>
+                ) : null}
+              </FormControl>
+            )}
+          />
+          {errors.root !== undefined ? (
+            <Alert color="error">{errors.root.message}</Alert>
+          ) : null}
+          <Button disabled={isPending} type="submit" variant="contained">
+            登录
+          </Button>
         </Stack>
       </form>
     </Stack>

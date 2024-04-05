@@ -7,7 +7,7 @@ function generateToken(): string {
   window.crypto.getRandomValues(arr); // 为 arr 填充随机数
   // 将每一个 arr 中的 v 转换为 16 禁止，并确保转换结果为 2 个字符，不足的前面会加 0
   // 接着将转换结果拼接成一个字符串
-  return Array.from(arr, (v) => v.toString(16).padStart(2, '0')).join(""); 
+  return Array.from(arr, (v) => v.toString(16).padStart(2, "0")).join("");
 }
 
 // TODO: 移除该模拟数据
@@ -20,31 +20,39 @@ const user = {
 } satisfies User;
 
 export interface SignInWithPasswordParams {
-  netid: string,
-  password: string,
+  netid: string;
+  password: string;
 }
 
 class AuthClient {
   // getUser 从服务器上获取信息，所以应该是异步的
+  // TODO: 添加一个 API 请求
   async getUser(): Promise<{ data: User | null; error?: string | null }> {
-    // TODO: 添加一个 API 请求
-    return { data: null, error: null };
+    const token = localStorage.getItem("custom-auth-token");
+
+    if (token != null) {
+      return { data: user, error: null };
+    }
+
+    return { data: null };
   }
 
   // 使用密码来进行登录
-  async signInWithPassword(params: SignInWithPasswordParams): Promise<{ error?: string }> {
+  async signInWithPassword(
+    params: SignInWithPasswordParams,
+  ): Promise<{ error?: string }> {
     const { netid, password } = params;
 
     // TODO: 添加一个 API 请求
     // TODO: 删除下面的硬编码数据
     if (netid !== "ecncadmin" || password !== "1qaz2wsx.") {
-      return { error: "账户或者密码错误" }
+      return { error: "账户或者密码错误" };
     }
 
     const token = generateToken();
     localStorage.setItem("custom-auth-token", token);
 
-    return {}
+    return {};
   }
 }
 

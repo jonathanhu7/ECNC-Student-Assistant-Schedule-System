@@ -1,3 +1,8 @@
+/* 全局变量 */
+:root {
+  --icon-fontSize: 1.25rem;
+}
+
 html {
   height: 100%;
 }

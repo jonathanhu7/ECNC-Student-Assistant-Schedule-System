@@ -27,7 +27,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  "rules": {
+    "@typescript-eslint/no-misused-promises": [2, {
+      "checksVoidReturn": {
+        "attributes": false
+      }
+    }]
+  },
   settings: { react: { version: "detect" } },
   ignorePatterns: ["next-env.d.ts"],
 };
