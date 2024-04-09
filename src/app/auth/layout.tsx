@@ -1,9 +1,8 @@
-import { GuestGuard } from "@/components/auth/guest-guard";
 import React from "react";
 import { Box } from "@mui/material";
 import RouterLink from "next/link";
 import { paths } from "@/path";
-import { Logo } from "@/components/core/logo";
+import { Logo } from "@/components/logo";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,71 +10,51 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps): React.ReactElement {
   return (
-    <GuestGuard>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        minHeight: "100%",
+      }}
+    >
+      {/* 登录布局的左侧 */}
       <Box
         sx={{
-          display: "grid",
-          // 创建两列，每列占用可用可空间的相等份额
-          gridTemplateColumns: "1fr 1fr",
-          // 设置容器的最小高度为 100%，容器至少会沾满其父容器的全部高度
-          minHeight: "100%",
+          display: "flex",
+          flex: "1 1 auto",
+          flexDirection: "column",
         }}
       >
-        <Box
-          sx={{
-            // 设置这个 box 为 flex 容器
-            display: "flex",
-            // flex: "1 1 auto" 告诉浏览器，这个 flex 项目应该能够等比例地扩展额外空间 (flex-grow: 1)
-            // 当空间不足时，也能等比例缩小来适应 (felx-shrink: 1)
-            // 并且在分配额外空间之前，他的初始大小由它的内容或尺寸来决定 (flex-basis: auto)
-            flex: "1 1 auto",
-            // 子元素的排列方向为垂直方向
-            flexDirection: "column",
-          }}
-        >
+        <Box sx={{ p: 3 }}>
           <Box
-            sx={{
-              // 设置内边距为 3，3 是 MUI 主题中的一个尺寸值，具体数值取决于主题配置
-              p: 3,
-            }}
+            component={RouterLink}
+            href={paths.home}
+            sx={{ display: "inline-block", fontSize: 0 }}
           >
-            <Box
-              // 表明这个 Box 实际上是一个路由链接
-              component={RouterLink}
-              // href 制定了额链接的目的地
-              href={paths.home}
-              sx={{
-                // 使这个元素表现为行内块级元素
-                display: "inline-block",
-                // 移除链接内字体大小，以避免布局问题
-                fontSize: 0,
-              }}
-            >
-              <Logo height={32} width={122} />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              alignItems: "center",
-              display: "flex",
-              flex: "1 1 auto",
-              justifyContent: "center",
-              p: 3,
-            }}
-          >
-            <Box sx={{ maxWidth: "450px", width: "100%" }}>{children}</Box>
+            <Logo height={32} width={122} />
           </Box>
         </Box>
-        {/* 接下来对登录布局的右半部分进行设置 */}
         <Box
           sx={{
             alignItems: "center",
-            backgroundImage: "url(/auth-background.jpg)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            display: "flex",
+            flex: "1 1 auto",
+            justifyContent: "center",
+            p: 3,
           }}
-        ></Box>
+        >
+          <Box sx={{ maxWidth: "450px", width: "100%" }}>{children}</Box>
+        </Box>
       </Box>
-    </GuestGuard>
+      {/* 登录布局的右侧 */}
+      <Box
+        sx={{
+          alignItems: "center",
+          backgroundImage: "url(/auth-background.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+    </Box>
   );
 }

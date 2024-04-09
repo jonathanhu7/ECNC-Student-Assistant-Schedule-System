@@ -1,6 +1,6 @@
-/* 该 page.tsx 不渲染任何界面，直接重定向到 /dashboard */
+/* 该 page.tsx 不渲染任何界面，直接重定向 */
 import { redirect } from "next/navigation";
 
 export default function Page(): never {
-  redirect("/dashboard");
+  redirect("/auth/sign-in");
 }

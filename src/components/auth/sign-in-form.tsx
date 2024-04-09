@@ -12,10 +12,8 @@ import {
 } from "@mui/material";
 import { z as zod } from "zod"; // zod 可以帮助我们检查表单数据
 import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/use-user";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authClient } from "@/lib/auth/client";
 import FormControl from "@mui/material/FormControl";
 import {
   Eye as EyeIcon,
@@ -39,7 +37,6 @@ const defaultValues = {
 
 export function SignInForm(): React.ReactElement {
   const router = useRouter();
-  const { checkSession } = useUser(); // 从 userContext 中解构出 checkSession 方法
   const [showPassword, setShowPassword] = useState<boolean>(false); // 设置是否显示密码
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -52,22 +49,9 @@ export function SignInForm(): React.ReactElement {
 
   const submitInfo = React.useCallback(
     async (values: Values): Promise<void> => {
-      setIsPending(true);
-      const { error } = await authClient.signInWithPassword(values);
-
-      if (error !== undefined) {
-        setError("root", { type: "server", message: error });
-        setIsPending(false);
-        return;
-      }
-
-      // 更新用户上下文
-      await checkSession?.();
-
-      // 登陆成功后刷新页面
-      router.refresh();
+      console.log("Sign In");
     },
-    [checkSession, router, setError],
+    [router, setError],
   );
 
   return (
