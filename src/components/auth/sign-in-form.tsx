@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { z as zod } from "zod"; // zod 可以帮助我们检查表单数据
+import { z as zod } from "zod";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,16 +22,16 @@ import {
 
 // 定义表单的数据类型
 const schema = zod.object({
-  netid: zod.string().min(1, { message: "请输入你的 netid" }),
+  username: zod.string().min(1, { message: "请输入你的用户名" }),
   password: zod.string().min(1, { message: "请输入你的密码" }),
 });
 
 // 将上述表单的数据类型转换为 typescript 的类型
 type Values = zod.infer<typeof schema>;
 // 用于测试的默认数据
-// TODO: 换成 postman 的 mock 数据
+// TODO: 删除 defaultValues
 const defaultValues = {
-  netid: "ecncadmin",
+  username: "ecncadmin",
   password: "1qaz2wsx.",
 } satisfies Values;
 
@@ -49,7 +49,33 @@ export function SignInForm(): React.ReactElement {
 
   const submitInfo = React.useCallback(
     async (values: Values): Promise<void> => {
-      console.log("Sign In");
+      setIsPending(true);
+      try {
+        // 发送登录请求
+        const response = await fetch("/api/auth/sign-in", {
+          method: "POST",
+          body: JSON.stringify({
+            username: values.username,
+            password: values.password,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          const errorData = (await response.json()) as { message?: string };
+          setError("root", {
+            type: "server",
+            message: errorData.message ?? "服务器发生错误",
+          });
+        }
+      } catch (error) {
+        setError("root", {
+          type: "client",
+          message: "客户端发生错误",
+        });
+      } finally {
+        setIsPending(false);
+      }
     },
     [router, setError],
   );
@@ -61,13 +87,13 @@ export function SignInForm(): React.ReactElement {
         <Stack spacing={2}>
           <Controller
             control={control}
-            name="netid"
+            name="username"
             render={({ field }) => (
-              <FormControl error={Boolean(errors.netid)}>
-                <InputLabel>NetID</InputLabel>
-                <OutlinedInput {...field} label="NetID" type="text" />
-                {errors.netid !== undefined ? (
-                  <FormHelperText>{errors.netid.message}</FormHelperText>
+              <FormControl error={Boolean(errors.username)}>
+                <InputLabel>用户名</InputLabel>
+                <OutlinedInput {...field} label="用户名" type="text" />
+                {errors.username !== undefined ? (
+                  <FormHelperText>{errors.username.message}</FormHelperText>
                 ) : null}
               </FormControl>
             )}
