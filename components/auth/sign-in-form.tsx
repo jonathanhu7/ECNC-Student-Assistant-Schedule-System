@@ -50,31 +50,40 @@ export function SignInForm(): React.ReactElement {
   const submitInfo = React.useCallback(
     async (values: Values): Promise<void> => {
       setIsPending(true);
-      try {
-        // 发送登录请求
-        const response = await fetch("/api/auth/sign-in", {
-          method: "POST",
-          body: JSON.stringify({
-            username: values.username,
-            password: values.password,
-          }),
-          headers: { "Content-Type": "application/json" },
-        });
+      // 发送登录请求
+      const response = await fetch("/api/auth/sign-in", {
+        method: "POST",
+        body: JSON.stringify({
+          username: values.username,
+          password: values.password,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
 
-        if (!response.ok) {
-          const errorData = (await response.json()) as { message?: string };
-          setError("root", {
-            type: "server",
-            message: errorData.message ?? "服务器发生错误",
-          });
-        }
-      } catch (error) {
+      // 根据返回的结果设置不同的错误信息
+      if (response.status === 200) {
+        // 将结果存储到 storage 中
+      } else if (response.status >= 400 && response.status < 500) {
+        const errorData = (await response.json()) as {
+          message: string;
+        };
+        setError("root", {
+          type: "server",
+          message: errorData.message,
+        });
+      } else if (response.status >= 500 && response.status < 600) {
+        const errorData = (await response.json()) as {
+          message: string;
+        };
         setError("root", {
           type: "client",
-          message: "客户端发生错误",
+          message: errorData.message,
         });
-      } finally {
-        setIsPending(false);
+      } else {
+        setError("root", {
+          type: "unknown",
+          message: "未知错误",
+        });
       }
     },
     [router, setError],
