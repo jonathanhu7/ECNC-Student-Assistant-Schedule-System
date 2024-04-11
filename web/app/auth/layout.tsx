@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import RouterLink from "next/link";
-import { paths } from "@/path";
+import { paths } from "@/paths";
 import { Logo } from "@/components/logo";
 
 interface LayoutProps {
@@ -28,7 +28,7 @@ export default function Layout({ children }: LayoutProps): React.ReactElement {
         <Box sx={{ p: 3 }}>
           <Box
             component={RouterLink}
-            href={paths.home}
+            href={paths.dashboard.overview}
             sx={{ display: "inline-block", fontSize: 0 }}
           >
             <Logo height={32} width={122} />

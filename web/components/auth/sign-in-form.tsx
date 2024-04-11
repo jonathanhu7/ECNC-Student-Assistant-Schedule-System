@@ -19,6 +19,7 @@ import {
   Eye as EyeIcon,
   EyeSlash as EyeSlashIcon,
 } from "@phosphor-icons/react";
+import { paths } from "@/paths";
 
 // 定义表单的数据类型
 const schema = zod.object({
@@ -28,90 +29,68 @@ const schema = zod.object({
 
 // 将上述表单的数据类型转换为 typescript 的类型
 type Values = zod.infer<typeof schema>;
-// 用于测试的默认数据
-// TODO: 删除 defaultValues
-const defaultValues = {
-  username: "ecncadmin",
-  password: "1qaz2wsx.",
-} satisfies Values;
 
 export function SignInForm(): React.ReactElement {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false); // 设置是否显示密码
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const {
-    control,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<Values>({ defaultValues, resolver: zodResolver(schema) });
+  const form = useForm<Values>({
+    defaultValues: { username: "", password: "" },
+    resolver: zodResolver(schema),
+  });
 
-  const submitInfo = React.useCallback(
-    async (values: Values): Promise<void> => {
-      setIsPending(true);
-      // 发送登录请求
-      const response = await fetch("/api/auth/sign-in", {
+  const onSubmit = async (values: Values) => {
+    try {
+      const response = await fetch(paths.api.auth.signIn, {
         method: "POST",
-        body: JSON.stringify({
-          username: values.username,
-          password: values.password,
-        }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       });
 
-      // 根据返回的结果设置不同的错误信息
-      if (response.status === 200) {
-        // 将结果存储到 storage 中
-      } else if (response.status >= 400 && response.status < 500) {
-        const errorData = (await response.json()) as {
-          message: string;
-        };
-        setError("root", {
+      const responseData = await response.json();
+
+      if (responseData.status !== "200") {
+        form.setError("root", {
           type: "server",
-          message: errorData.message,
-        });
-      } else if (response.status >= 500 && response.status < 600) {
-        const errorData = (await response.json()) as {
-          message: string;
-        };
-        setError("root", {
-          type: "client",
-          message: errorData.message,
-        });
-      } else {
-        setError("root", {
-          type: "unknown",
-          message: "未知错误",
+          message: responseData.message,
         });
       }
-    },
-    [router, setError],
-  );
+    } catch (errors) {
+      form.setError("root", {
+        type: "client",
+        message: "客户端处理表单数据时发生错误",
+      });
+    }
+  };
 
   return (
     <Stack spacing={4}>
       <Typography variant="h4">登录</Typography>
-      <form onSubmit={handleSubmit(submitInfo)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <Controller
-            control={control}
+            control={form.control}
             name="username"
             render={({ field }) => (
-              <FormControl error={Boolean(errors.username)}>
+              <FormControl error={Boolean(form.formState.errors.username)}>
                 <InputLabel>用户名</InputLabel>
                 <OutlinedInput {...field} label="用户名" type="text" />
-                {errors.username !== undefined ? (
-                  <FormHelperText>{errors.username.message}</FormHelperText>
+                {form.formState.errors.username !== undefined ? (
+                  <FormHelperText>
+                    {form.formState.errors.username.message}
+                  </FormHelperText>
                 ) : null}
               </FormControl>
             )}
           />
           <Controller
-            control={control}
+            control={form.control}
             name="password"
             render={({ field }) => (
-              <FormControl error={Boolean(errors.password)}>
+              <FormControl error={Boolean(form.formState.errors.password)}>
                 <InputLabel>密码</InputLabel>
                 <OutlinedInput
                   {...field}
@@ -137,14 +116,16 @@ export function SignInForm(): React.ReactElement {
                   label="密码"
                   type={showPassword ? "text" : "password"}
                 />
-                {errors.password !== undefined ? (
-                  <FormHelperText>{errors.password.message}</FormHelperText>
+                {form.formState.errors.password !== undefined ? (
+                  <FormHelperText>
+                    {form.formState.errors.password.message}
+                  </FormHelperText>
                 ) : null}
               </FormControl>
             )}
           />
-          {errors.root !== undefined ? (
-            <Alert color="error">{errors.root.message}</Alert>
+          {form.formState.errors.root !== undefined ? (
+            <Alert color="error">{form.formState.errors.root.message}</Alert>
           ) : null}
           <Button disabled={isPending} type="submit" variant="contained">
             登录
