@@ -9,7 +9,7 @@ export interface GenAssistGuardProps {
 
 export default async function GenAssistGuard({
   children,
-}: GenAssistGuardProps) {
+}: GenAssistGuardProps): Promise<JSX.Element> {
   const session = await getServerSession();
 
   if (session === null) {

@@ -1,3 +1,6 @@
+# server
+config.yaml
+
 # web
 node_modules
 .next

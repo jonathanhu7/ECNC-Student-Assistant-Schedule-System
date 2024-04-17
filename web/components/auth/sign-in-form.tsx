@@ -40,7 +40,7 @@ export function SignInForm(): React.ReactElement {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (values: Values) => {
+  const onSubmit = async (values: Values): Promise<void> => {
     try {
       const response = await fetch(paths.api.auth.signIn, {
         method: "POST",
@@ -52,7 +52,7 @@ export function SignInForm(): React.ReactElement {
 
       const responseData = await response.json();
 
-      if (responseData.status !== "200") {
+      if (!response.ok) {
         form.setError("root", {
           type: "server",
           message: responseData.message,
