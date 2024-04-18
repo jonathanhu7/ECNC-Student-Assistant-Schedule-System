@@ -1,5 +1,6 @@
 # server
 config.yaml
+tmp
 
 # web
 node_modules
