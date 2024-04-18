@@ -12,8 +12,7 @@ func main() {
 	utils.InitDB()
 	r := gin.Default()
 
-	r.GET("/auth/salt/:username", handlers.GetSalt)
-	r.POST("/auth/sign-in", handlers.SignIn)
+	r.POST("/auth/signIn", handlers.SignIn)
 
 	r.Run(":8080")
 }

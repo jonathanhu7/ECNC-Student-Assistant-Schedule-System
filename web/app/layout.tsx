@@ -1,27 +1,21 @@
-"use client";
-
 import React from "react";
 import "@/style/global.css";
-
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import { createCustomeTheme } from "@/style/theme/create-custom-theme";
+import { ThemeProvider } from "@/components/core/theme-provider";
+import AuthContext from "@/context/auth-context";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const theme = createCustomeTheme();
-
   return (
     <html lang="zh-CN">
       <body>
-        {/* ThemeProvider 的作用是向其内部的所有子组件保持一致的主题样式 */}
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline 的作用是确保应用的基础样式的一致性 */}
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
+        {/* AuthContext 能够提供用户的登陆信息，主要在客户端组件中使用 */}
+        <AuthContext>
+          {/* ThemeProvider 的作用是向其内部的所有子组件保持一致的主题样式 */}
+          <ThemeProvider>{children}</ThemeProvider>
+        </AuthContext>
       </body>
     </html>
   );

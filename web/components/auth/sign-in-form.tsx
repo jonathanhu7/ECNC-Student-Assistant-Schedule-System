@@ -19,7 +19,7 @@ import {
   Eye as EyeIcon,
   EyeSlash as EyeSlashIcon,
 } from "@phosphor-icons/react";
-import { paths } from "@/paths";
+import { signIn } from "next-auth/react";
 
 // 定义表单的数据类型
 const schema = zod.object({
@@ -41,28 +41,33 @@ export function SignInForm(): React.ReactElement {
   });
 
   const onSubmit = async (values: Values): Promise<void> => {
+    setIsPending(true);
+
     try {
-      const response = await fetch(paths.api.auth.signIn, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+      const result = await signIn("credentials", {
+        // 禁用默认的重定向逻辑
+        redirect: false,
+        username: values.username,
+        password: values.password,
       });
 
-      const responseData = await response.json();
-
-      if (!response.ok) {
+      // 处理登录结果
+      if (result?.ok === false) {
         form.setError("root", {
           type: "server",
-          message: responseData.message,
+          message: result.error ?? "",
         });
+      } else {
+        // 登录成功后刷新页面
+        router.refresh();
       }
     } catch (errors) {
       form.setError("root", {
         type: "client",
         message: "客户端处理表单数据时发生错误",
       });
+    } finally {
+      setIsPending(false);
     }
   };
 

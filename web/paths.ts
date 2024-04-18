@@ -4,6 +4,9 @@ export const paths = {
   },
   dashboard: {
     overview: "/dashboard",
+    submitFreeTime: "/dashboard/submitFreeTime",
+    schedule: "/dashboard/schedule",
+    settings: "/dashboard/settings",
   },
   api: {
     auth: {
